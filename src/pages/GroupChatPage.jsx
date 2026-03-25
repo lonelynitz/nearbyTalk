@@ -80,7 +80,7 @@ export default function GroupChatPage() {
     <div className="chat-page group-chat-page">
       <header className="chat-header">
         <div className="chat-peer-info">
-          <button className="btn-back" onClick={() => navigate('/friends')}>←</button>
+          <button className="btn-back" onClick={() => navigate('/lobby')} title="Home">🏠</button>
           <div>
             <h3>{groupInfo?.name || 'Group'}</h3>
             <span className="group-member-count">

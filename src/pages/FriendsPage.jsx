@@ -43,7 +43,7 @@ export default function FriendsPage() {
   return (
     <div className="friends-page">
       <header className="friends-header">
-        <button className="btn-back" onClick={() => navigate('/lobby')}>← Back</button>
+        <button className="btn-back" onClick={() => navigate('/lobby')}>🏠 Home</button>
         <h1>Friends & Rooms</h1>
         <button className="btn-icon" onClick={() => setShowAddModal(true)} title="Add Friend">
           +

@@ -54,6 +54,9 @@ export default function CallPage() {
 
   return (
     <div className="call-page">
+      <div className="call-page-header">
+        <button className="btn-icon" onClick={() => navigate('/lobby')} title="Home">🏠</button>
+      </div>
       {callType === 'video' ? (
         <VideoCallUI
           localStream={localStream}

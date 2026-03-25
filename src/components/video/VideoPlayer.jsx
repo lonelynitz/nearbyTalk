@@ -112,6 +112,29 @@ export default function VideoPlayer({
     );
   }
 
+  // Viewer: peer is broadcasting but viewer hasn't picked their local file yet
+  if (!isBroadcaster && syncState && !videoUrl) {
+    return (
+      <div className="video-picker-area">
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="video/mp4,video/webm,video/ogg"
+          onChange={handleFileSelect}
+          style={{ display: 'none' }}
+        />
+        <p className="video-sync-info">📡 {syncState.fileName || 'Video'} is being shared. Open the same file to watch together.</p>
+        <button
+          className="btn btn-primary video-picker-btn"
+          onClick={() => fileInputRef.current?.click()}
+          type="button"
+        >
+          Open File to Join
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="video-player-container">
       <div className="video-sync-banner">
@@ -124,7 +147,7 @@ export default function VideoPlayer({
       <div className="video-player-wrapper">
         <video
           ref={videoRef}
-          src={isBroadcaster ? videoUrl : undefined}
+          src={videoUrl || undefined}
           controls={isBroadcaster}
           autoPlay={!isBroadcaster}
           playsInline

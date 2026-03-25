@@ -10,6 +10,10 @@ export default function useWebRTC({ roomId, uid, peerUid, callType }) {
   const localStreamRef = useRef(null);
   const unsubs = useRef([]);
 
+  // Deterministic callId — same for both peers
+  const callId = [uid, peerUid].sort().join('_') + '_' + roomId;
+  const isInitiator = uid < peerUid;
+
   const startCall = useCallback(async () => {
     if (!roomId || !uid) return;
     setCallStatus('getting-media');
@@ -20,9 +24,6 @@ export default function useWebRTC({ roomId, uid, peerUid, callType }) {
     });
     localStreamRef.current = stream;
     setLocalStream(stream);
-
-    const callId = `${roomId}_${Date.now()}`;
-    const isInitiator = uid < peerUid;
 
     const pc = new RTCPeerConnection(ICE_SERVERS);
     pcRef.current = pc;
@@ -72,7 +73,7 @@ export default function useWebRTC({ roomId, uid, peerUid, callType }) {
         pc.addIceCandidate(new RTCIceCandidate(c));
       }));
     }
-  }, [roomId, uid, peerUid, callType]);
+  }, [roomId, uid, peerUid, callType, callId, isInitiator]);
 
   const endCall = useCallback(async () => {
     pcRef.current?.close();

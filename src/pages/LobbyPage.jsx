@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import useGeolocation from '../hooks/useGeolocation';
 import useMatchmaking from '../hooks/useMatchmaking';
@@ -11,8 +11,24 @@ import ThemeToggle from '../components/shared/ThemeToggle';
 export default function LobbyPage() {
   const { user, nickname, friendCode } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { position, geohash, error: geoError, loading: geoLoading } = useGeolocation();
   const [radius, setRadius] = useState(50);
+
+  const { status, matchData, startSearching, stopSearching } = useMatchmaking({
+    uid: user?.uid,
+    nickname,
+    position,
+    geohash,
+    radiusKm: radius,
+  });
+
+  // Auto-start search when redirected from chat with ?autoSearch=1
+  useEffect(() => {
+    if (searchParams.get('autoSearch') === '1' && position && status === 'idle') {
+      startSearching();
+    }
+  }, [searchParams, position, status]);
 
   const { status, matchData, startSearching, stopSearching } = useMatchmaking({
     uid: user?.uid,

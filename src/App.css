@@ -617,6 +617,29 @@ a:hover { color: var(--accent-hover); }
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.7);
 }
+.peer-disconnected-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #e53e3e;
+  color: white;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  gap: 12px;
+}
+.btn-go-home {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.btn-go-home:hover {
+  background: rgba(255,255,255,0.3);
+}
 .chat-actions {
   display: flex;
   align-items: center;
@@ -772,6 +795,12 @@ a:hover { color: var(--accent-hover); }
   display: flex;
   flex-direction: column;
   background: var(--bg-primary);
+}
+.call-page-header {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
 }
 .audio-call-ui {
   flex: 1;
@@ -1518,6 +1547,12 @@ a:hover { color: var(--accent-hover); }
   font-size: 0.75rem;
   color: var(--warning);
   padding: 4px 16px;
+}
+.encryption-pending-notice {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: 4px 16px;
+  opacity: 0.8;
 }
 .chat-empty {
   display: flex;

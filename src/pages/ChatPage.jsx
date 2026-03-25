@@ -132,11 +132,19 @@ export default function ChatPage() {
           <button className="btn-icon" onClick={() => handleCall('video')} title="Video Call">📹</button>
           <button className="btn-icon" onClick={() => setShowReport(true)} title="Report">⚠️</button>
           <button className="btn-icon" onClick={() => setShowBlock(true)} title="Block">🚫</button>
+          <button className="btn-icon" onClick={() => navigate('/lobby')} title="Home">🏠</button>
           <button className="btn-end" onClick={handleEndChat}>End</button>
         </div>
       </header>
 
       <EncryptionBanner ready={encryptionReady} />
+
+      {peerDisconnected && (
+        <div className="peer-disconnected-banner">
+          <span>⚠️ {peerNickname} has left the chat</span>
+          <button className="btn-go-home" onClick={() => navigate('/lobby?autoSearch=1')}>Find someone new</button>
+        </div>
+      )}
 
       {videoActive && (
         <VideoPlayer
@@ -169,7 +177,8 @@ export default function ChatPage() {
       <ChatInput
         onSend={handleSend}
         onTyping={handleTyping}
-        disabled={!encryptionReady || peerDisconnected}
+        encryptionReady={encryptionReady}
+        disabled={peerDisconnected}
       />
 
       {showReport && (

@@ -14,7 +14,7 @@ export async function createGroupCall(callId, groupId, initiatorUid, type) {
     status: 'active',
     createdAt: serverTimestamp(),
     endedAt: null,
-  });
+  }, { merge: true });
   return callId;
 }
 

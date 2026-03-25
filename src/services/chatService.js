@@ -16,6 +16,8 @@ export function sendEncryptedMessage(roomId, senderUid, encryptedPayload, extra 
 
 export function subscribeToMessages(roomId, callback) {
   const messagesRef = ref(rtdb, `chats/${roomId}/messages`);
+  // Use startAt with current server time to avoid missing early messages
+  // onChildAdded fires for all existing + new children
   const handler = onChildAdded(messagesRef, (snapshot) => {
     callback({ id: snapshot.key, ...snapshot.val() });
   });

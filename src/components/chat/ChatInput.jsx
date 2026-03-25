@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { containsProfanity, filterText } from '../../utils/profanityFilter';
 
-export default function ChatInput({ onSend, onTyping, disabled }) {
+export default function ChatInput({ onSend, onTyping, disabled, encryptionReady }) {
   const [text, setText] = useState('');
   const [warning, setWarning] = useState('');
 
@@ -22,10 +22,13 @@ export default function ChatInput({ onSend, onTyping, disabled }) {
   return (
     <div className="chat-input-bar">
       {warning && <div className="profanity-warning">{warning}</div>}
+      {!encryptionReady && !disabled && (
+        <div className="encryption-pending-notice">🔐 Waiting for peer to connect — messages will send once they join</div>
+      )}
       <form onSubmit={handleSubmit} style={{ display: 'flex', flex: 1, gap: '10px' }}>
         <input
           type="text"
-          placeholder={disabled ? 'Waiting for encryption...' : 'Type a message...'}
+          placeholder="Type a message..."
           value={text}
           onChange={e => { setText(e.target.value); if (onTyping) onTyping(); }}
           disabled={disabled}

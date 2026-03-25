@@ -25,8 +25,8 @@ export default function GroupCallPage() {
     getGroup(groupId).then(g => {
       if (g) setGroupInfo(g);
     });
-    // Create the group call document
-    createGroupCall(groupId, groupId, user.uid, callType);
+    // Ensure group call doc exists; ignore error if already exists
+    createGroupCall(groupId, groupId, user.uid, callType).catch(() => {});
   }, [groupId, user, callType]);
 
   const { localStream, remoteStreams, callStatus, endCall } = useGroupWebRTC({
@@ -61,6 +61,7 @@ export default function GroupCallPage() {
       <div className="group-call-header">
         <h3>{groupInfo?.name || 'Group Call'}</h3>
         <span className="call-status-text">{callStatus}</span>
+        <button className="btn-icon" onClick={() => navigate('/lobby')} title="Home">🏠</button>
       </div>
 
       <GroupCallGrid

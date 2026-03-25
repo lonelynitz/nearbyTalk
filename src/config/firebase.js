@@ -4,13 +4,14 @@ import { getFirestore } from 'firebase/firestore';
 import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAnv-NhLUQEHFn9gi_lqYaNy6dCgNhg-bc",
-  authDomain: "match-vibe-f67fb.firebaseapp.com",
-  projectId: "match-vibe-f67fb",
-  storageBucket: "match-vibe-f67fb.firebasestorage.app",
-  messagingSenderId: "991364219874",
-  appId: "1:991364219874:web:e7ba7cc7e6d13ec804afbb",
-  databaseURL: "https://match-vibe-f67fb-default-rtdb.asia-southeast1.firebasedatabase.app",
+  apiKey: "AIzaSyA090405MCfWLv9P_OKw75X-4w3agnvYXw",
+  authDomain: "nearbytalk-bd8fb.firebaseapp.com",
+  projectId: "nearbytalk-bd8fb",
+  storageBucket: "nearbytalk-bd8fb.firebasestorage.app",
+  messagingSenderId: "176107226517",
+  appId: "1:176107226517:web:693245030c5c603d29229c",
+  measurementId: "G-J3FW7KWNJX",
+  databaseURL: "https://nearbytalk-bd8fb-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 
 const app = initializeApp(firebaseConfig);
